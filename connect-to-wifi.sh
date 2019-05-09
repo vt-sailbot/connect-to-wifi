@@ -8,7 +8,6 @@ do
 done
 
 # Start the network interface specified in network.conf
-cp ./network.conf /etc/wpa_supplicant.conf
 wpa_supplicant -Dwext -iwlan0 -c /etc/wpa_supplicant.conf -B
 
 echo "nameserver 8.8.8.8" >> /etc/resolv.conf

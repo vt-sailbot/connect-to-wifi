@@ -1,11 +1,21 @@
 #!/bin/bash
 
-echo "Installing wifi reset service to /opt/wifi-reset."
-mkdir -p /opt/wifi-reset
-cp -f wifi-reset.sh /opt/wifi-reset/wifi-reset.sh
+# Install service
+mkdir -p /opt/connect-to-wifi
+cp -f connect-to-wifi.sh /opt/connect-to-wifi/connect-to-wifi.sh
 
-echo "Installing systemd service to run at boot."
-cp -f wifi-reset.service /lib/systemd/system/wifi-reset.service
+# Install service to run at boot
+cp -f connect-to-wifi.service /lib/systemd/system/connect-to-wifi.service
 
-echo "Enabling systemd service."
-systemctl enable wifi-reset.service > /dev/null
+# Get network details
+echo "WARNING: The install script will overwrite network.conf. Save the changes elsewhere if you wish to keep them.\n"
+echo "To change the network details later, use change-network.sh\n\n"
+echo "Enter network name (SSID): "
+read ssid
+wpa_supplicant $ssid >> ./network.conf
+
+# Move network config
+cp ./network.conf /etc/wpa_supplicant.conf
+
+# Enable systemd service
+systemctl enable connect-to-wifi.service > /dev/null
