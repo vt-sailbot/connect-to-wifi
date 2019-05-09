@@ -1,0 +1,4 @@
+# The network config file shouldn't be version controlled since it is
+# assumed to be set up on the fly. See network.conf.example for syntax
+# specifications
+network.conf

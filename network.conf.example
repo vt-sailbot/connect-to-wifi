@@ -1,0 +1,6 @@
+# See wpa_supplicant.conf man page for more details.
+# Create a file called network.conf to manually configure te network
+# if automatic configuration fails.
+network={
+	ssid="example"
+}
