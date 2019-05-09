@@ -1,12 +1,12 @@
 [Unit]
 Description="Automatic Wi-Fi Connection Builder"
 ConditionHost="beaglebone"
-OnFailure=reboot
 
 [Service]
 Type=oneshot
 RemainAfterExit=yes
 ExecStart=/bin/bash /opt/connect-to-wifi/connect-to-wifi.sh
+Restart=on-failure
 
 [Install]
 WantedBy=multi-user.target
