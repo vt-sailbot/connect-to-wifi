@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # Kill all existing network interfaces
 killall wpa_supplicant
 while [1 -eq pidof -s wpa_supplicant]
