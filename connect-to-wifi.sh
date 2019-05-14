@@ -1,4 +1,5 @@
 #!/bin/bash
+# Built for Debian 9 (Stretch)
 
 # Kill all existing network interfaces
 killall wpa_supplicant
