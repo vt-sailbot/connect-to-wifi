@@ -8,11 +8,13 @@ cp -f connect-to-wifi.sh /opt/connect-to-wifi/connect-to-wifi.sh
 cp -f connect-to-wifi.service /lib/systemd/system/connect-to-wifi.service
 
 # Get network details
-echo "WARNING: The install script will overwrite network.conf. Save the changes elsewhere if you wish to keep them.\n"
-echo "To change the network details later, use change-network.sh\n\n"
+echo "WARNING: The install script will overwrite network.conf. Save the changes elsewhere if you wish to keep them."
+echo "To change the network details later, use change-network.sh"
 echo "Enter network name (SSID): "
 read ssid
-wpa_supplicant $ssid >> ./network.conf
+echo "Enter network passphrase: "
+read passphrase
+wpa_passphrase $ssid $passphrase >> ./network.conf
 
 # Move network config
 cp ./network.conf /etc/wpa_supplicant.conf
