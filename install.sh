@@ -1,4 +1,8 @@
 #!/bin/bash
+# Built for Debian 9 (Stretch)
+
+# Fetch dependencies
+apt-get install psmisc
 
 # Install service
 mkdir -p /opt/connect-to-wifi
