@@ -1,9 +1,6 @@
 #!/bin/bash
 # Built for Debian 9 (Stretch)
 
-# Fetch dependencies
-apt-get install psmisc
-
 # Install service
 mkdir -p /opt/connect-to-wifi
 cp -f connect-to-wifi.sh /opt/connect-to-wifi/connect-to-wifi.sh
@@ -18,10 +15,20 @@ echo "Enter network name (SSID): "
 read ssid
 echo "Enter network passphrase: "
 read passphrase
-wpa_passphrase $ssid $passphrase >> ./network.conf
 
-# Move network config
-cp ./network.conf /etc/wpa_supplicant.conf
+# write to network config
+rm ./network.conf
+touch ./network.conf
+echo "auto wlan0" >> ./network.conf
+echo "iface wlan0 inet dhcp" >> ./network.conf
+echo "  wpa-ssid" $ssid >> ./network.conf
+echo "  wpa-psk " $passphrase >> ./network.conf
+
+# move to interfaces
+cat network.conf >> /etc/network/interfaces
+
+# add nameserver
+echo "nameserver 8.8.8.8" >> /etc/resolv.conf
 
 # Enable systemd service
 systemctl enable connect-to-wifi.service > /dev/null
